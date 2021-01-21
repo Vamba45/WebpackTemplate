@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Vamba45/WebpackTemplate#readme",
   "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.28.2",
     "webpack-cli": "^3.1.2"
   }
