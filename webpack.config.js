@@ -7,7 +7,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
     entry: './src/index.js',
     output: {
-        filename: 'bundle.js',
+        filename: 'js/bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
     optimization: {
@@ -16,13 +16,17 @@ module.exports = {
             new UglifyJsPlugin({})
         ]
     },
+    devServer: {
+        contentBase: path.resolve(__dirname, 'dist'),
+        port: 4200
+    },
     plugins: [
         new HTMLPlugin({
             filename: 'index.html',
             template: './src/index.html'
         }),
         new MiniCssExtractPlugin({
-            filename: 'style.css'
+            filename: 'css/style.css'
         })
     ],
     module: {
