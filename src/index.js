@@ -1,6 +1,7 @@
 import AppService from './modules/app.service.js'
 import {config} from './modules/config.js'
-import './modules/header.component'
+import './modules/header.component.js'
+import './scss/main.scss'
 
 import './css/main.css'
 
