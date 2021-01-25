@@ -1,5 +1,11 @@
+@import "./header.scss";
+
 $margin: 20px;
 
 hr {
     margin: $margin;
+}
+
+.sass {
+    display: flex;
 }

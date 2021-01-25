@@ -1,13 +1,18 @@
 const path = require('path')
+
 const HTMLPlugin = require('html-webpack-plugin')
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        app: './src/index.js'
+    },
     output: {
-        filename: 'js/bundle.js',
+        filename: 'js/[name].js',
         path: path.resolve(__dirname, 'dist')
     },
     optimization: {
@@ -26,18 +31,42 @@ module.exports = {
             template: './src/index.html'
         }),
         new MiniCssExtractPlugin({
-            filename: 'css/style.css'
+            filename: 'css/[name].css'
         })
     ],
     module: {
         rules: [
             {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
+                use: [MiniCssExtractPlugin.loader, 
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                require('autoprefixer')
+                            ]
+                        }
+                    }
+                ]
             },
             {
                 test: /\.scss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+                use: [
+                    MiniCssExtractPlugin.loader, 
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                require('autoprefixer')
+                            ]
+                        }
+                    }, 
+                    {
+                        loader: 'sass-loader'
+                    }
+                ]
             },
             {
                 test: /\.m?js$/,
